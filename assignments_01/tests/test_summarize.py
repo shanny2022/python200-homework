@@ -17,9 +17,11 @@ def test_grouping_extremes_precipitation_and_range(readings):
     summaries = DailyAggregator(min_hours=2).summarize(readings)
     assert [day.date for day in summaries] == ["2026-04-08", "2026-04-09"]
     first, second = summaries
-    assert (first.temp_max, first.temp_min, first.precipitation_total, first.hours) == (16, -2, 4, 3)
+    assert (first.temp_max, first.temp_min, first.hours) == (16, -2, 3)
+    assert first.precipitation_total == pytest.approx(4.0)
     assert first.temp_range() == 18
-    assert (second.temp_max, second.temp_min, second.precipitation_total, second.hours) == (20, 8, 7, 2)
+    assert (second.temp_max, second.temp_min, second.hours) == (20, 8, 2)
+    assert second.precipitation_total == pytest.approx(7.0)
     assert second.temp_range() == 12
 
 

@@ -3,7 +3,8 @@ from weatherkit import HourlyReading, WeatherResponse, to_readings
 
 def test_count_order_and_index_pairing():
     response = WeatherResponse.model_validate({
-        "latitude": 40, "longitude": -74, "hourly": {
+        "latitude": 40, "longitude": -74, "timezone": "GMT",
+        "elevation": 254.0, "hourly": {
             "time": ["2026-04-09T01:00", "2026-04-08T02:00", "2026-04-10T03:00"],
             "temperature_2m": [12.5, -3.0, 21.0],
             "precipitation": [0.0, 1.5, 4.0]}})

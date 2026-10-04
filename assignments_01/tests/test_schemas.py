@@ -8,7 +8,8 @@ from weatherkit import WeatherResponse
 
 
 def sample_data():
-    return {"latitude": 40, "longitude": -74, "hourly": {
+    return {"latitude": 40, "longitude": -74, "timezone": "GMT",
+        "elevation": 254.0, "hourly": {
         "time": ["2026-04-08T00:00"], "temperature_2m": [10.0],
         "precipitation": [0.0]}}
 
@@ -48,5 +49,13 @@ def test_unequal_lengths(field):
 def test_null_temperature():
     raw = sample_data()
     raw["hourly"]["temperature_2m"] = [None]
+    with pytest.raises(ValidationError):
+        WeatherResponse.model_validate(raw)
+
+
+@pytest.mark.parametrize("field", ["timezone", "elevation"])
+def test_required_metadata(field):
+    raw = sample_data()
+    del raw[field]
     with pytest.raises(ValidationError):
         WeatherResponse.model_validate(raw)
