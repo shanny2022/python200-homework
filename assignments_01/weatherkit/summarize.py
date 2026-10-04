@@ -12,8 +12,8 @@ class DailySummary:
     date: str
     temp_max: float
     temp_min: float
-    precipitation_total: float
-    hours: int
+    precipitation_sum: float
+    hours_observed: int
 
     def temp_range(self) -> float:
         """Return the difference between the highest and lowest temperature."""
@@ -60,8 +60,8 @@ class DailyAggregator:
 #         summaries = DailyAggregator(min_hours=2).summarize(readings)
 #         assert [day.date for day in summaries] == ["2026-04-08", "2026-04-09"]
 #         first, second = summaries
-# >       assert (first.temp_max, first.temp_min, first.precipitation_total, first.hours) == (16, -2, 4, 3)
-# E       assert (-2, -2, 4.0, 3) == (16, -2, 4, 3)
+# >       assert (first.temp_max, first.temp_min, first.hours_observed) == (16, -2, 3)
+# E       assert (-2, -2, 3) == (16, -2, 3)
 # E
 # E         At index 0 diff: -2 != 16
 # E         Use -v to get more diff
