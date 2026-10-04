@@ -21,17 +21,16 @@ fewer than 24 observations are excluded and reported by `incomplete_days()`.
 
 ## Pending before course submission
 
-- Add the original course `weather_raw.json` to `assignments_01/`. It was not
-  included with the request; synthetic data has not been substituted.
 - Check the inferred warmup implementations and model/dataclass field names
   against the full course assignment questions, which were not provided.
 - Review and rewrite the reflection draft in your own words.
-- Run the full checks above with the original JSON. Confirm 168 hourly readings,
-  seven daily rows, and the first two expected daily results from the guide.
 - Request mentor review once the mentor's GitHub username is known. Merge only
   after approval, and submit the open PR URL to the course.
 
-Current verification: 7 warmup tests and 16 package tests pass. The original-data
-test requires the missing JSON. Intentional conversion and aggregation mutations
+Current verification: 7 warmup tests and all 17 package tests pass. The supplied
+original JSON is included unchanged and validates with 168 hourly observations.
+The report prints seven days of 24 observations each; April 8 has high 16.8 °C,
+low 7.8 °C, and 0.0 mm precipitation, and April 9 has high 19.3 °C, low 3.7 °C,
+and 0.0 mm precipitation, matching the guide. Intentional conversion and aggregation mutations
 were caught by tests; exact failure output is recorded in source comments and
 the working implementations were restored. `conftest.py` is empty.
