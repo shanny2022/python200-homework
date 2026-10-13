@@ -1,5 +1,19 @@
 # python200-homework
 
+Week 2's six-task mini-project is in `assignments_02/project_02.py`.
+It uses New York City's 2023 daily weather from Open-Meteo to compare
+a low-temperature baseline with a four-feature linear regression model.
+
+```sh
+uv pip install -r requirements.txt
+.venv/bin/python assignments_02/project_02.py
+```
+
+Plots, the reusable weather CSV, and test predictions are saved in
+`assignments_02/outputs/` regardless of the working directory. Running the
+script requires internet access. `run_results.txt` records the verified run.
+The Week 2 warmup is a separate exercise and is not included in this mini-project.
+
 Week 1 work is in `assignments_01/`, on branch `assignments_01`.
 
 Requires Python 3.10+ and Pydantic 2:
