@@ -48,7 +48,6 @@ print(df.head())
 
 # --- Task 2: Look at the Features ---
 print("\nTask 2 — Feature exploration")
-print(df.describe())
 print("Missing values by column:\n", df.isna().sum())
 # If a day has a missing measurement, drop the whole row rather than invent
 # a temperature or precipitation value. Report the count before modeling.
@@ -57,6 +56,7 @@ df = df.dropna().copy()
 print("Rows dropped for missing values:", rows_before - len(df))
 if len(df) < 10:
     raise ValueError("Too few complete daily observations to train and evaluate.")
+print(df.describe())
 correlations = df.select_dtypes(include="number").corr()[
     "temperature_2m_max"
 ].drop("temperature_2m_max").sort_values(ascending=False)

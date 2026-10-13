@@ -1,0 +1,25 @@
+scikit-learn Q1 slope: 1.0166134185303521
+scikit-learn Q1 intercept: 6.497763578274753
+Predicted high for low of 6 degrees: 12.597444089456866
+Predicted high for low of 18 degrees: 24.79680511182109
+scikit-learn Q2 original shape: (5,)
+scikit-learn Q2 reshaped shape: (5, 1)
+
+Linear Regression Q2 X_train shape: (96, 1)
+Linear Regression Q2 X_test shape: (24, 1)
+Linear Regression Q2 y_train shape: (96,)
+Linear Regression Q2 y_test shape: (24,)
+
+Linear Regression Q3 slope: 0.9439910045300892
+Linear Regression Q3 intercept: 4.578845900439294
+Linear Regression Q3 test RMSE: 2.4768005422975534
+Linear Regression Q3 test R²: 0.8944151516634623
+
+Linear Regression Q4 one-feature test R²: 0.8944151516634623
+Linear Regression Q4 two-feature test R²: 0.945061816962249
+Test R² change from adding rain: 0.0506466652987867
+Does adding the rain flag help? True
+temp_min coefficient: 0.97643686876614
+is_rainy coefficient: -2.9190219583163626
+
+Warmup plots saved to: /Users/shuntoriareid/Downloads/python200-homework/assignments_02/outputs

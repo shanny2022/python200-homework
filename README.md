@@ -1,18 +1,20 @@
 # python200-homework
 
-Week 2's six-task mini-project is in `assignments_02/project_02.py`.
+Week 2's warmup exercises are in `assignments_02/warmup_02.py`, and its
+six-task mini-project is in `assignments_02/project_02.py`.
 It uses New York City's 2023 daily weather from Open-Meteo to compare
 a low-temperature baseline with a four-feature linear regression model.
 
 ```sh
 uv pip install -r requirements.txt
+.venv/bin/python assignments_02/warmup_02.py
 .venv/bin/python assignments_02/project_02.py
 ```
 
 Plots, the reusable weather CSV, and test predictions are saved in
 `assignments_02/outputs/` regardless of the working directory. Running the
 script requires internet access. `run_results.txt` records the verified run.
-The Week 2 warmup is a separate exercise and is not included in this mini-project.
+`warmup_results.txt` records the verified warmup run.
 
 Week 1 work is in `assignments_01/`, on branch `assignments_01`.
 
@@ -33,7 +35,7 @@ The pipeline validates JSON with Pydantic, converts parallel hourly lists into
 `HourlyReading` dataclasses, and produces sorted daily summaries. Days with
 fewer than 24 observations are excluded and reported by `incomplete_days()`.
 
-## Pending before course submission
+## Week 1 follow-up
 
 - Review and rewrite the reflection draft in your own words.
 - Request mentor review once the mentor's GitHub username is known. Merge only

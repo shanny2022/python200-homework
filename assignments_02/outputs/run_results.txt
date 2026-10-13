@@ -10,6 +10,14 @@ Dataset shape: (365, 5)
 [5 rows x 5 columns]
 
 Task 2 — Feature exploration
+Missing values by column:
+ temperature_2m_max    0
+temperature_2m_min    0
+precipitation_sum     0
+wind_speed_10m_max    0
+date                  0
+dtype: int64
+Rows dropped for missing values: 0
        temperature_2m_max  ...                 date
 count          365.000000  ...                  365
 mean            17.966027  ...  2023-07-02 00:00:00
@@ -21,14 +29,6 @@ max             35.900000  ...  2023-12-31 00:00:00
 std              8.735886  ...                  NaN
 
 [8 rows x 5 columns]
-Missing values by column:
- temperature_2m_max    0
-temperature_2m_min    0
-precipitation_sum     0
-wind_speed_10m_max    0
-date                  0
-dtype: int64
-Rows dropped for missing values: 0
 Feature correlations with the daily high:
  temperature_2m_min    0.933575
 precipitation_sum     0.005288
