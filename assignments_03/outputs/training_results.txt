@@ -1,0 +1,47 @@
+Weather shape: (365, 5)
+   temperature_2m_max  temperature_2m_min  ...  wind_speed_10m_max       date
+0                12.0                 4.9  ...                17.4 2023-01-01
+1                12.9                 4.5  ...                 9.0 2023-01-02
+2                13.0                 6.3  ...                19.4 2023-01-03
+3                18.0                 9.5  ...                18.2 2023-01-04
+4                13.2                 7.4  ...                12.1 2023-01-05
+
+[5 rows x 5 columns]
+Class balance (0=skip, 1=good): {0: 228, 1: 137}
+Fraction good: 37.5%
+k= 1, mean CV accuracy=0.9385
+k= 3, mean CV accuracy=0.9214
+k= 5, mean CV accuracy=0.9113
+k= 7, mean CV accuracy=0.9043
+k= 9, mean CV accuracy=0.9112
+k=11, mean CV accuracy=0.9077
+k=15, mean CV accuracy=0.8975
+k=21, mean CV accuracy=0.9043
+Selected k: 1
+
+KNN: {'accuracy': 0.9178082191780822, 'precision': 0.8888888888888888, 'recall': 0.8888888888888888, 'f1': 0.8888888888888888}
+              precision    recall  f1-score   support
+
+        skip       0.93      0.93      0.93        46
+        good       0.89      0.89      0.89        27
+
+    accuracy                           0.92        73
+   macro avg       0.91      0.91      0.91        73
+weighted avg       0.92      0.92      0.92        73
+
+
+Logistic regression: {'accuracy': 0.6164383561643836, 'precision': 0.4782608695652174, 'recall': 0.4074074074074074, 'f1': 0.44}
+              precision    recall  f1-score   support
+
+        skip       0.68      0.74      0.71        46
+        good       0.48      0.41      0.44        27
+
+    accuracy                           0.62        73
+   macro avg       0.58      0.57      0.57        73
+weighted avg       0.61      0.62      0.61        73
+
+temperature_2m_max: -0.4328
+temperature_2m_min: +0.2640
+precipitation_sum: -2.8761
+wind_speed_10m_max: -0.3425
+Saved models/weather_classifier.pkl and models/weather_classifier_metadata.json
