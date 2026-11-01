@@ -1,0 +1,46 @@
+{
+  "python_version": "3.13.14",
+  "sklearn_version": "1.9.1",
+  "feature_names": [
+    "temperature_2m_max",
+    "temperature_2m_min",
+    "precipitation_sum",
+    "wind_speed_10m_max"
+  ],
+  "label_rule": "7 <= high <= 26 Celsius; low >= 0 Celsius; precipitation < 3 mm; wind < 30 km/h",
+  "city": "New York City",
+  "year": 2023,
+  "model_type": "KNeighborsClassifier",
+  "selected_k": 1,
+  "test_accuracy": 0.9178082191780822,
+  "test_f1": 0.8888888888888888,
+  "test_precision": 0.8888888888888888,
+  "test_recall": 0.8888888888888888,
+  "comparison": {
+    "knn": {
+      "accuracy": 0.9178082191780822,
+      "precision": 0.8888888888888888,
+      "recall": 0.8888888888888888,
+      "f1": 0.8888888888888888
+    },
+    "logistic_regression": {
+      "accuracy": 0.6164383561643836,
+      "precision": 0.4782608695652174,
+      "recall": 0.4074074074074074,
+      "f1": 0.44
+    }
+  },
+  "cv_accuracy_by_k": {
+    "1": 0.9384570426651081,
+    "3": 0.9214494447691409,
+    "5": 0.911279953243717,
+    "7": 0.9043249561659849,
+    "9": 0.9111630625365283,
+    "11": 0.9077147866744595,
+    "15": 0.8975452951490356,
+    "21": 0.9043249561659849
+  },
+  "test_size": 0.2,
+  "random_state": 42,
+  "source_url": "https://archive-api.open-meteo.com/v1/archive?latitude=40.7128&longitude=-74.006&start_date=2023-01-01&end_date=2023-12-31&daily=temperature_2m_max&daily=temperature_2m_min&daily=precipitation_sum&daily=wind_speed_10m_max&timezone=America%2FNew_York&temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=mm"
+}

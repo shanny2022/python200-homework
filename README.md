@@ -48,3 +48,7 @@ low 7.8 °C, and 0.0 mm precipitation, and April 9 has high 19.3 °C, low 3.7 °
 and 0.0 mm precipitation, matching the guide. Intentional conversion and aggregation mutations
 were caught by tests; exact failure output is recorded in source comments and
 the working implementations were restored. `conftest.py` is empty.
+Week 3 classification work is in [assignments_03](assignments_03/README.md).
+It includes preprocessing and classifier warmups, NYC weather model training,
+and a separate script that loads the committed model to predict new days.
+See the assignment README for setup, verified results, and practice guidance.
