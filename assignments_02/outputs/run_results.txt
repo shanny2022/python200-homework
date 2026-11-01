@@ -1,0 +1,68 @@
+Task 1 — New York City, 2023
+Dataset shape: (365, 5)
+   temperature_2m_max  temperature_2m_min  ...  wind_speed_10m_max       date
+0                12.0                 4.9  ...                17.4 2023-01-01
+1                12.9                 4.5  ...                 9.0 2023-01-02
+2                13.0                 6.3  ...                19.4 2023-01-03
+3                18.0                 9.5  ...                18.2 2023-01-04
+4                13.2                 7.4  ...                12.1 2023-01-05
+
+[5 rows x 5 columns]
+
+Task 2 — Feature exploration
+Missing values by column:
+ temperature_2m_max    0
+temperature_2m_min    0
+precipitation_sum     0
+wind_speed_10m_max    0
+date                  0
+dtype: int64
+Rows dropped for missing values: 0
+       temperature_2m_max  ...                 date
+count          365.000000  ...                  365
+mean            17.966027  ...  2023-07-02 00:00:00
+min             -3.800000  ...  2023-01-01 00:00:00
+25%             10.800000  ...  2023-04-02 00:00:00
+50%             17.600000  ...  2023-07-02 00:00:00
+75%             25.900000  ...  2023-10-01 00:00:00
+max             35.900000  ...  2023-12-31 00:00:00
+std              8.735886  ...                  NaN
+
+[8 rows x 5 columns]
+Feature correlations with the daily high:
+ temperature_2m_min    0.933575
+precipitation_sum     0.005288
+wind_speed_10m_max   -0.233563
+Name: temperature_2m_max, dtype: float64
+Strongest absolute correlation: temperature_2m_min
+
+Task 3 — Summer feature
+Summer days: 92
+Non-summer days: 273
+
+Task 4 — Baseline model
+Slope: 1.000
+Test RMSE: 3.356 °C
+Test R²: 0.869
+
+Task 5 — Full model
+Train R²: 0.884
+Test R²: 0.897
+Test RMSE: 2.973 °C
+Test R² change from baseline: +0.028
+Test RMSE reduction: +0.383 °C
+temperature_2m_min    : +1.019
+precipitation_sum     : -0.103
+wind_speed_10m_max    : +0.015
+is_summer             : -0.015
+Effects for a one-standard-deviation feature increase (°C):
+temperature_2m_min    : +8.120
+precipitation_sum     : -1.021
+wind_speed_10m_max    : +0.095
+is_summer             : -0.007
+
+Task 6 — Evaluation
+Dataset days: 365 Training days: 292 Test days: 73
+low temperature range RMSE: 3.487 °C
+middle temperature range RMSE: 2.717 °C
+high temperature range RMSE: 2.615 °C
