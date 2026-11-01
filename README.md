@@ -52,3 +52,6 @@ Week 3 classification work is in [assignments_03](assignments_03/README.md).
 It includes preprocessing and classifier warmups, NYC weather model training,
 and a separate script that loads the committed model to predict new days.
 See the assignment README for setup, verified results, and practice guidance.
+
+Week 4's reusable classifier, warmups, tests, and batch prediction demo are in
+[assignments_04](assignments_04/README.md).
