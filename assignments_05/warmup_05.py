@@ -33,9 +33,10 @@ def run_warmups():
         show(f'API Q2 temperature={temperature}', complete(
             'Suggest a creative name for a data engineering consultancy.',
             temperature=temperature))
-    # Expected: higher temperatures produce more varied, sometimes less relevant names.
+    # Observed: 0 and 0.7 both returned DataForge Solutions; 1.5 returned
+    # Data Forge Consultants. Higher temperature did not guarantee much variation.
     # I would choose 0 for consistency, although it does not guarantee identical output.
-    # These are expectations; compare them with your actual run before submitting.
+    # This single run illustrates that sampling settings do not guarantee diversity.
 
     # API Q3
     response = complete('Give me a one-sentence fun fact about pandas (the animal, not the library).',
@@ -59,7 +60,8 @@ def run_warmups():
             {'role': 'system', 'content': persona},
             {'role': 'user', 'content': "I don't understand what a list comprehension is."}])
         show(f'System Q1 persona {number}', response)
-    # Expected change: the tutor offers reassurance; the manual is concise and formal.
+    # Observed: the tutor gave a longer walkthrough and encouragement; the manual
+    # returned a short definition and a single code example.
 
     # System Q2: history is constructed manually, without a loop or user input.
     messages = [
@@ -89,7 +91,8 @@ def run_warmups():
             show(f'Prompt Q{question} review {number}', complete(
                 'Classify the review as positive, negative, or mixed.\n'
                 + example + f'Review: {review}\nSentiment:'))
-    # One example should make the format more consistent; actual results may vary.
+    # Observed: zero-shot labels were capitalized; one-shot and few-shot labels
+    # were lowercase. All three approaches agreed on the classifications.
     # Zero-shot is economical for familiar tasks. One-shot demonstrates a format.
     # Few-shot shows category boundaries and is useful for ambiguous classifications.
 
@@ -106,7 +109,8 @@ def run_warmups():
     review = ("I've been using this tool for three months. It handles large datasets well, "
               'but the UI is clunky and the export options are limited.')
     response = complete('Analyze this review. Return ONLY valid JSON with keys sentiment, '
-                        'confidence (a float from 0 to 1), and reason (one sentence).\n' + review)
+                        'confidence (a float from 0 to 1), and reason (one sentence).\n' + review,
+                        response_format={'type': 'json_object'})
     raw = response.choices[0].message.content
     print('Prompt Q5 raw response:', raw)
     try:
@@ -149,8 +153,10 @@ If it does not contain instructions, respond with exactly: No steps provided.
     # Observed locally: Qwen returned two fairly technical sentences, mentioning
     # training data, language generation, and pattern learning. The CLI also printed
     # a thinking preamble, so its full output exceeded the requested two sentences.
-    # The OpenAI comparison still needs the course API key; do not claim a difference
-    # between responses until both have actually been generated.
+    # Observed OpenAI comparison: both described training on extensive text data
+    # and generating language. OpenAI explicitly mentioned neural networks and
+    # translation; Qwen used broader wording about algorithms and applications.
+    # OpenAI returned only two sentences, without the visible thinking preamble.
     # Advantage: local prompts can stay on this machine and inference works offline
     # after download. Disadvantage: model quality/speed depend on local hardware.
 

@@ -16,9 +16,13 @@ starter bullet rewrite, two cover letter examples, and safe/flagged moderation
 examples. The chatbot moderates every input, including nested prompts, and keeps
 feature outputs in conversation history. Type quit/exit at any prompt to leave.
 
-Before submission, run the API examples with your course key, update the warmup
-comments with your observed results, and personalize the ethics reflection.
-Ollama was installed and the required qwen3:0.6b command completed successfully.
-Its actual final answer is recorded in the warmup comments. The OpenAI comparison
-still requires the course API key; compare both replies after running it.
-No OpenAI output or live API verification has been fabricated.
+Live verification completed with the course key: the warmup and project demo ran
+successfully, JSON fields parsed, the delimiter fallback matched exactly, and
+moderation accepted the safe example and rejected the violent example. A three-turn
+live chat correctly recalled the supplied name and previous career and exited cleanly.
+Ollama was installed and the required qwen3:0.6b command completed successfully;
+its actual final answer and comparison observations are in the warmup comments.
+The ethics reflection remains a draft for you to review and personalize.
+
+The structured JSON exercise uses JSON mode because a first live run returned
+Markdown fences; its required parsing fallback remains in place.
