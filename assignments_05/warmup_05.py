@@ -138,13 +138,21 @@ If it does not contain instructions, respond with exactly: No steps provided.
     # --- Local Models with Ollama ---
     # Ollama Q1
     # Run: ollama run qwen3:0.6b "Explain what a large language model is in two sentences."
-    # Actual Ollama output: PENDING — Ollama is not installed in this environment.
-    # Paste the real terminal output here after running the command; do not invent it.
+    # Actual Ollama final answer (verbatim; CLI thinking preamble omitted):
+    # A large language model is an advanced artificial intelligence system trained on
+    # extensive textual data to understand and generate human-like language, enabling tasks
+    # such as writing, answering questions, and more. It uses complex algorithms and massive
+    # datasets to learn patterns and context, making it highly versatile for various
+    # applications.
     show('Ollama Q1 OpenAI comparison', complete(
         'Explain what a large language model is in two sentences.'))
-    # Actual response comparison is pending a local run. A local model can keep
-    # prompts on your machine and work offline after download; a disadvantage is
-    # that quality and speed depend on the model size and available hardware.
+    # Observed locally: Qwen returned two fairly technical sentences, mentioning
+    # training data, language generation, and pattern learning. The CLI also printed
+    # a thinking preamble, so its full output exceeded the requested two sentences.
+    # The OpenAI comparison still needs the course API key; do not claim a difference
+    # between responses until both have actually been generated.
+    # Advantage: local prompts can stay on this machine and inference works offline
+    # after download. Disadvantage: model quality/speed depend on local hardware.
 
 
 if __name__ == '__main__':
