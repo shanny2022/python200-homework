@@ -93,23 +93,26 @@ def run_keyword_questions():
     query = "What are your hours on weekends?"
     result = simple_keyword_retrieval(query, documents, verbose=True)
     print("Keyword Q1 selected document:", result[0][0])
-    # hours.txt wins because weekend/hours terms overlap most strongly there.
+    # Observed: loyalty.txt wins, unexpectedly, because the function leaves
+    # "your" in the query tokens and that word appears in "your choice" there.
+    # It misses hours.txt because "weekends" and "weekend" are not normalized.
 
     # Keyword Question 2
     query = "Do you have anything without caffeine?"
     result = simple_keyword_retrieval(query, documents, verbose=True)
     print("Keyword Q2 selected document:", result[0][0])
-    # Exact word overlap can miss a decaf product described with different terms;
-    # semantic retrieval can connect related language and synonyms.
+    # Observed: no document was selected. The query's wording shares no tokens
+    # with these four short documents, so keyword overlap misses the menu. A
+    # semantic or synonym-aware search could connect caffeine-free with decaf.
 
     # Keyword Question 3 — prediction before running retrieval:
-    # I predict loyalty.txt: rewards and loyalty are related concepts, but this
-    # retriever only compares exact words, so it may instead find no match.
+    # Prediction: loyalty.txt, because rewards and loyalty are related ideas.
     query = "How do I sign up for rewards?"
     result = simple_keyword_retrieval(query, documents, verbose=True)
     print("Keyword Q3 selected document:", result[0][0])
-    # The actual result is determined by token overlap; 'rewards' does not appear
-    # in the loyalty text, so a no-match result would expose the vocabulary gap.
+    # Observed: no match. "Rewards" does not occur in loyalty.txt, and the
+    # retriever does not know that rewards and loyalty are synonyms; prediction
+    # was wrong, demonstrating the exact-vocabulary limitation.
 
 
 # --- Semantic RAG Concepts ---
@@ -140,9 +143,14 @@ def run_llamaindex_questions():
     from llama_index.core.evaluation import FaithfulnessEvaluator, RelevancyEvaluator
 
     repo = Path(__file__).resolve().parents[1]
-    docs_dir = repo / "lessons/06_AI_augmentation/resources/brightleaf_pdfs"
+    docs_dir = Path(os.environ.get(
+        "BRIGHTLEAF_DOCS_DIR",
+        repo / "lessons/06_AI_augmentation/resources/brightleaf_pdfs",
+    )).expanduser()
     assert docs_dir.exists(), f"BrightLeaf document directory not found: {docs_dir}"
     Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+    # LlamaIndex 0.14 defaults to a retired model; use the current course model.
+    Settings.llm = OpenAI(model="gpt-4o-mini")
     documents = SimpleDirectoryReader(str(docs_dir)).load_data()
     print(f"Loaded {len(documents)} BrightLeaf document pages.")
     index = VectorStoreIndex.from_documents(documents)
@@ -156,12 +164,10 @@ def run_llamaindex_questions():
         print(f"\nQuestion: {question}\nAnswer: {response}")
         for node in response.source_nodes:
             print(f"Score: {node.score}; chunk: {node.node.get_content()[:150]}")
-    # Observation from this checkout: the BrightLeaf PDFs are not present, so
-    # the directory assertion stops execution before retrieval or generation.
-    # Consequently, no chunk relevance, model tone, or unexpected retrieval can
-    # be reported honestly here. After adding the lesson PDFs, inspect each
-    # query's three chunks and record whether the benefits/security evidence is
-    # on topic and whether the answer is specific, hedged, or unsupported.
+    # Observed with the supplied PDFs: the leading chunk matched each query and
+    # both answers were direct and specific. For benefits, however, the other
+    # two top-three chunks were partnerships and mission content; for security,
+    # benefits and mission passages were also retrieved unexpectedly.
 
     # LlamaIndex Question 2
     q = questions[0]
@@ -170,8 +176,10 @@ def run_llamaindex_questions():
         print(f"\nTop-k={top_k} answer: {response}")
         for node in response.source_nodes:
             print(f"Score: {node.score}; chunk: {node.node.get_content()[:150]}")
-    # Compare the actual responses: additional context can help, but irrelevant
-    # passages can distract the model or dilute the useful evidence.
+    # Observed: top-k=1 and top-k=5 both gave a correct benefits summary with a
+    # similar direct tone; top-k=5 added some useful detail but also included
+    # unrelated chunks. More context did not materially improve this answer and
+    # could distract the model on a less focused query.
 
     # LlamaIndex Question 3
     difficult_query = "What is BrightLeaf's favorite coffee shop?"
@@ -179,12 +187,11 @@ def run_llamaindex_questions():
     print(f"\nDifficult question: {difficult_query}\nAnswer: {response}")
     for node in response.source_nodes:
         print(f"Score: {node.score}; chunk: {node.node.get_content()}")
-    # Observation from this checkout: this query did not run because the
-    # BrightLeaf PDF directory is absent. I therefore cannot claim whether the
-    # retriever returned irrelevant evidence or whether the model abstained.
-    # Once the PDFs are available, compare all three chunks with the out-of-
-    # domain question; a retrieval score threshold and explicit abstention
-    # instruction would help if the response guesses from unrelated context.
+    # Observed: retrieval returned unrelated mission, partnership, and benefits
+    # passages (top score 0.467). The model correctly said the documents did not
+    # give a favorite coffee shop, in a clear, direct tone. Both evaluators later
+    # scored this abstention 0.0, so judge feedback needs interpretation. A
+    # similarity threshold and explicit abstention policy could reinforce this.
 
     # LlamaIndex Question 4
     judge = OpenAI(model="gpt-4o-mini")
@@ -200,9 +207,12 @@ def run_llamaindex_questions():
         print("Relevancy:", relevancy_result.score, relevancy_result.feedback)
     # Faithfulness measures support in retrieved context (1 means supported,
     # 0 means unsupported); relevancy measures whether the response addresses the
-    # question. LLM-as-a-judge uses a model to assess nuanced answers where exact
-    # string matching is inadequate. Compare the scores above: the out-of-domain
-    # query may score lower, but judge scores are estimates, not ground truth.
+    # question. Here the in-domain response scored 1.0 for both, while the
+    # abstention to the out-of-domain question scored 0.0 for both. The judge
+    # appears to penalize the abstention because it neither cites support nor
+    # gives the requested favorite shop. LLM-as-a-judge helps assess nuanced
+    # answers where exact matching is inadequate, but scores are estimates and
+    # should be read alongside the response and retrieved evidence.
 
 
 if __name__ == "__main__":

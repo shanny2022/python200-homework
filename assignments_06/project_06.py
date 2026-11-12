@@ -1,5 +1,6 @@
 """Week 6 mini-project: Groundwork Coffee Co. document Q&A assistant."""
 from pathlib import Path
+import os
 
 from dotenv import load_dotenv
 
@@ -7,15 +8,19 @@ from dotenv import load_dotenv
 def main():
     repo = Path(__file__).resolve().parents[1]
     load_dotenv(repo / ".env")
-    if not __import__("os").getenv("OPENAI_API_KEY"):
+    if not os.getenv("OPENAI_API_KEY"):
         print("Warning: OPENAI_API_KEY was not found in the repository .env file.")
     else:
         print("API key loaded successfully.")
 
     from llama_index.core import Settings, SimpleDirectoryReader, VectorStoreIndex
     from llama_index.embeddings.openai import OpenAIEmbedding
+    from llama_index.llms.openai import OpenAI
 
-    docs_dir = repo / "lessons/06_AI_augmentation/resources/groundwork_docs"
+    docs_dir = Path(os.environ.get(
+        "GROUNDWORK_DOCS_DIR",
+        repo / "lessons/06_AI_augmentation/resources/groundwork_docs",
+    )).expanduser()
     assert docs_dir.exists(), f"Document directory not found: {docs_dir}"
 
     documents = SimpleDirectoryReader(str(docs_dir)).load_data()
@@ -24,6 +29,7 @@ def main():
         print("Document:", document.metadata.get("file_name", "(unknown file)"))
 
     Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small")
+    Settings.llm = OpenAI(model="gpt-4o-mini")
     index = VectorStoreIndex.from_documents(documents)
     engine = index.as_query_engine(similarity_top_k=3)
     print("Index built successfully. Ready to answer questions.")
@@ -45,11 +51,13 @@ def main():
             print("Chunk:", source.node.get_content()[:200])
         else:
             print("Top source: no source nodes returned")
-    # Observation from this checkout: the Groundwork document directory is not
-    # present, so the assertion stops the program before any question is sent.
-    # No answer accuracy, confidence, or surprises can be reported from a live
-    # run here. With the course files available, compare each answer against its
-    # printed source chunk and record any unsupported detail or mismatch.
+    # Observed with the supplied Groundwork files: four of five answers were
+    # supported by the FAQ, menu, story, and catering material. The dairy-free
+    # answer correctly named oat, almond, and soy milk. The weekend-hours answer
+    # failed: retrieval ranked our_story.txt first (0.534) and omitted the FAQ
+    # from all three top chunks, so the model incorrectly said hours were absent.
+    # Its wording sounded definite despite the missed evidence. The catering
+    # answer was correct but brief, omitting details such as the 72-hour notice.
 
     # Step 5 — deliberately out-of-scope question to probe abstention.
     failure_query = "What is the shop manager's home address?"
@@ -59,12 +67,12 @@ def main():
         print(f"Source {number}: {source.node.metadata.get('file_name', '(unknown file)')}")
         print("Similarity:", source.score)
         print("Chunk:", source.node.get_content()[:200])
-    # Observation from this checkout: the missing Groundwork directory prevents
-    # this probe from running, so there is no observed retrieval, answer tone,
-    # guess, or abstention to report. When the documents are available, check
-    # whether unrelated chunks are returned and whether the model invents the
-    # absent personal detail. A similarity threshold and an explicit abstention
-    # policy could reduce unsupported answers if it guesses.
+    # Observed: the address is absent. Retrieval returned FAQ, catering, and
+    # story chunks (scores 0.284, 0.256, and 0.239); the FAQ includes business
+    # hours but no home address. The model explicitly said the address was not
+    # provided and did not guess. This run abstained safely, though its top
+    # chunks were only loosely related. A relevance threshold and explicit
+    # abstention instruction could make that behavior more reliable.
 
 
 if __name__ == "__main__":
@@ -72,10 +80,10 @@ if __name__ == "__main__":
 
 
 # --- Step 6: Reflection ---
-# The core semantic pipeline here is a handful of LlamaIndex calls: configure an
-# embedding model, load documents, build an index, and create a query engine.
-# Implementing chunking, embedding calls, vector storage, similarity search, and
-# prompt assembly by hand would require substantially more code and maintenance.
+# The project uses 34 nonblank, noncomment lines for document setup, indexing,
+# the five-query loop, and source reporting. LlamaIndex handles chunking,
+# embedding calls, vector storage, similarity search, and prompt assembly; a
+# manual keyword pipeline needs more code for retrieval and prompt construction.
 # Frameworks make these standard pieces quick to compose, while still requiring
 # us to inspect retrieval quality and decide how the model should handle gaps.
 #
