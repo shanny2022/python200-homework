@@ -45,8 +45,11 @@ def main():
             print("Chunk:", source.node.get_content()[:200])
         else:
             print("Top source: no source nodes returned")
-    # Reflection to complete after the live run: Did the answers sound accurate
-    # and well grounded? Note any surprising answer or unsupported detail.
+    # Observation from this checkout: the Groundwork document directory is not
+    # present, so the assertion stops the program before any question is sent.
+    # No answer accuracy, confidence, or surprises can be reported from a live
+    # run here. With the course files available, compare each answer against its
+    # printed source chunk and record any unsupported detail or mismatch.
 
     # Step 5 — deliberately out-of-scope question to probe abstention.
     failure_query = "What is the shop manager's home address?"
@@ -56,10 +59,12 @@ def main():
         print(f"Source {number}: {source.node.metadata.get('file_name', '(unknown file)')}")
         print("Similarity:", source.score)
         print("Chunk:", source.node.get_content()[:200])
-    # Review the actual retrieval and response: the requested personal detail
-    # should be absent. Note whether the system retrieved unrelated material,
-    # guessed confidently, or abstained. A score threshold and an explicit
-    # abstention policy could reduce unsupported answers.
+    # Observation from this checkout: the missing Groundwork directory prevents
+    # this probe from running, so there is no observed retrieval, answer tone,
+    # guess, or abstention to report. When the documents are available, check
+    # whether unrelated chunks are returned and whether the model invents the
+    # absent personal detail. A similarity threshold and an explicit abstention
+    # policy could reduce unsupported answers if it guesses.
 
 
 if __name__ == "__main__":

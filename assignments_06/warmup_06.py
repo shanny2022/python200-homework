@@ -156,8 +156,12 @@ def run_llamaindex_questions():
         print(f"\nQuestion: {question}\nAnswer: {response}")
         for node in response.source_nodes:
             print(f"Score: {node.score}; chunk: {node.node.get_content()[:150]}")
-    # Record observations after running: evaluate relevance, confidence/hedging,
-    # and whether any retrieved chunk was unexpected.
+    # Observation from this checkout: the BrightLeaf PDFs are not present, so
+    # the directory assertion stops execution before retrieval or generation.
+    # Consequently, no chunk relevance, model tone, or unexpected retrieval can
+    # be reported honestly here. After adding the lesson PDFs, inspect each
+    # query's three chunks and record whether the benefits/security evidence is
+    # on topic and whether the answer is specific, hedged, or unsupported.
 
     # LlamaIndex Question 2
     q = questions[0]
@@ -175,9 +179,12 @@ def run_llamaindex_questions():
     print(f"\nDifficult question: {difficult_query}\nAnswer: {response}")
     for node in response.source_nodes:
         print(f"Score: {node.score}; chunk: {node.node.get_content()}")
-    # This is intentionally out of domain. Inspect whether retrieval brings
-    # irrelevant evidence and whether the answer abstains; a score threshold,
-    # clearer abstention prompt, or better metadata filters could help.
+    # Observation from this checkout: this query did not run because the
+    # BrightLeaf PDF directory is absent. I therefore cannot claim whether the
+    # retriever returned irrelevant evidence or whether the model abstained.
+    # Once the PDFs are available, compare all three chunks with the out-of-
+    # domain question; a retrieval score threshold and explicit abstention
+    # instruction would help if the response guesses from unrelated context.
 
     # LlamaIndex Question 4
     judge = OpenAI(model="gpt-4o-mini")
