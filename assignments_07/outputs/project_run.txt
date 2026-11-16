@@ -1,0 +1,408 @@
+
+--- Query: Load the happiness data and tell me its shape and column names. ---
+╭────────────────────────────────── New run ───────────────────────────────────╮
+│                                                                              │
+│ Load the happiness data and tell me its shape and column names.              │
+│                                                                              │
+╰─ OpenAIModel - gpt-4o-mini ──────────────────────────────────────────────────╯
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  happiness_data = load_happiness_data()                                        
+  shape = happiness_data.shape                                                  
+  column_names = happiness_data.columns.tolist()                                
+  print("Shape of the dataset:", shape)                                         
+  print("Column names:", column_names)                                          
+ ────────────────────────────────────────────────────────────────────────────── 
+Code execution failed at line 'shape = happiness_data.shape' due to: 
+AttributeError: 'dict' object has no attribute 'shape'
+[Step 1: Duration 2.12 seconds| Input tokens: 2,450 | Output tokens: 106]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  happiness_data = load_happiness_data()                                        
+  print(happiness_data)  # Output the data structure to understand what it      
+  contains                                                                      
+ ────────────────────────────────────────────────────────────────────────────── 
+Execution logs:
+{'shape': (1502, 11), 'columns': ['Ranking', 'country', 'region', 
+'happiness_score', 'gdp_per_capita', 'Social support', 'Healthy life 
+expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of 
+corruption', 'year']}
+
+Out: None
+[Step 2: Duration 1.61 seconds| Input tokens: 5,155 | Output tokens: 205]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 3 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  final_answer({"shape": (1502, 11), "columns": ['Ranking', 'country',          
+  'region', 'happiness_score', 'gdp_per_capita', 'Social support', 'Healthy     
+  life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions  
+  of corruption', 'year']})                                                     
+ ────────────────────────────────────────────────────────────────────────────── 
+Final answer: {'shape': (1502, 11), 'columns': ['Ranking', 'country', 'region', 
+'happiness_score', 'gdp_per_capita', 'Social support', 'Healthy life 
+expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of 
+corruption', 'year']}
+[Step 3: Duration 2.41 seconds| Input tokens: 8,103 | Output tokens: 385]
+{'shape': (1502, 11), 'columns': ['Ranking', 'country', 'region', 'happiness_score', 'gdp_per_capita', 'Social support', 'Healthy life expectancy', 'Freedom to make life choices', 'Generosity', 'Perceptions of corruption', 'year']}
+
+--- Query: Summarize the happiness_score column. ---
+╭────────────────────────────────── New run ───────────────────────────────────╮
+│                                                                              │
+│ Summarize the happiness_score column.                                        │
+│ You have been provided with these additional arguments, that you can access  │
+│ directly using the keys as variables:                                        │
+│ {'happiness_df':       Ranking      country  ... Perceptions of corruption   │
+│ year                                                                         │
+│ 0           1  Switzerland  ...                   0.24000  2015              │
+│ 1           2      Iceland  ...                   0.74000  2015              │
+│ 2           3      Denmark  ...                   0.12000  2015              │
+│ 3           4       Norway  ...                   0.34000  2015              │
+│ 4           5       Canada  ...                   0.40000  2015              │
+│ ...       ...          ...  ...                       ...   ...              │
+│ 1497       78    Venezuela  ...                   0.14982  2024              │
+│ 1498       54      Vietnam  ...                   0.27818  2024              │
+│ 1499      130        Yemen  ...                   0.19678  2024              │
+│ 1500      131       Zambia  ...                   0.19012  2024              │
+│ 1501      135     Zimbabwe  ...                   0.22708  2024              │
+│                                                                              │
+│ [1502 rows x 11 columns]}.                                                   │
+│                                                                              │
+╰─ OpenAIModel - gpt-4o-mini ──────────────────────────────────────────────────╯
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  happiness_summary = summarize_column(column='happiness_score')                
+  print(happiness_summary)                                                      
+ ────────────────────────────────────────────────────────────────────────────── 
+Execution logs:
+{'count': 1502.0, 'mean': 5.448899800266311, 'std': 1.12564459495165, 'min': 
+1.721, '25%': 4.593425, '50%': 5.46865, '75%': 6.278449999999999, 'max': 7.8421}
+
+Out: None
+[Step 4: Duration 1.85 seconds| Input tokens: 11,681 | Output tokens: 478]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  final_answer({                                                                
+      "count": 1502,                                                            
+      "mean": 5.4489,                                                           
+      "std": 1.1256,                                                            
+      "min": 1.721,                                                             
+      "25%": 4.5934,                                                            
+      "50%": 5.4687,                                                            
+      "75%": 6.2784,                                                            
+      "max": 7.8421                                                             
+  })                                                                            
+ ────────────────────────────────────────────────────────────────────────────── 
+Final answer: {'count': 1502, 'mean': 5.4489, 'std': 1.1256, 'min': 1.721, 
+'25%': 4.5934, '50%': 5.4687, '75%': 6.2784, 'max': 7.8421}
+[Step 5: Duration 2.68 seconds| Input tokens: 15,509 | Output tokens: 680]
+{'count': 1502, 'mean': 5.4489, 'std': 1.1256, 'min': 1.721, '25%': 4.5934, '50%': 5.4687, '75%': 6.2784, 'max': 7.8421}
+
+--- Query: What is the correlation between gdp_per_capita and happiness_score? Is it statistically significant? ---
+╭────────────────────────────────── New run ───────────────────────────────────╮
+│                                                                              │
+│ What is the correlation between gdp_per_capita and happiness_score? Is it    │
+│ statistically significant?                                                   │
+│ You have been provided with these additional arguments, that you can access  │
+│ directly using the keys as variables:                                        │
+│ {'happiness_df':       Ranking      country  ... Perceptions of corruption   │
+│ year                                                                         │
+│ 0           1  Switzerland  ...                   0.24000  2015              │
+│ 1           2      Iceland  ...                   0.74000  2015              │
+│ 2           3      Denmark  ...                   0.12000  2015              │
+│ 3           4       Norway  ...                   0.34000  2015              │
+│ 4           5       Canada  ...                   0.40000  2015              │
+│ ...       ...          ...  ...                       ...   ...              │
+│ 1497       78    Venezuela  ...                   0.14982  2024              │
+│ 1498       54      Vietnam  ...                   0.27818  2024              │
+│ 1499      130        Yemen  ...                   0.19678  2024              │
+│ 1500      131       Zambia  ...                   0.19012  2024              │
+│ 1501      135     Zimbabwe  ...                   0.22708  2024              │
+│                                                                              │
+│ [1502 rows x 11 columns]}.                                                   │
+│                                                                              │
+╰─ OpenAIModel - gpt-4o-mini ──────────────────────────────────────────────────╯
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  correlation_result = compute_correlation(col1='gdp_per_capita',               
+  col2='happiness_score')                                                       
+  print(correlation_result)                                                     
+ ────────────────────────────────────────────────────────────────────────────── 
+Execution logs:
+{'col1': 'gdp_per_capita', 'col2': 'happiness_score', 'pearson_r': 0.6313, 
+'p_value': 0.0}
+
+Out: None
+[Step 6: Duration 1.86 seconds| Input tokens: 20,034 | Output tokens: 781]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  final_answer({                                                                
+      "correlation_coefficient": 0.6313,                                        
+      "p_value": 0.0,                                                           
+      "significance": "statistically significant"                               
+  })                                                                            
+ ────────────────────────────────────────────────────────────────────────────── 
+Final answer: {'correlation_coefficient': 0.6313, 'p_value': 0.0, 
+'significance': 'statistically significant'}
+[Step 7: Duration 2.60 seconds| Input tokens: 24,785 | Output tokens: 918]
+{'correlation_coefficient': 0.6313, 'p_value': 0.0, 'significance': 'statistically significant'}
+
+--- Query: Show me the top 5 happiest countries in 2020. ---
+╭────────────────────────────────── New run ───────────────────────────────────╮
+│                                                                              │
+│ Show me the top 5 happiest countries in 2020.                                │
+│ You have been provided with these additional arguments, that you can access  │
+│ directly using the keys as variables:                                        │
+│ {'happiness_df':       Ranking      country  ... Perceptions of corruption   │
+│ year                                                                         │
+│ 0           1  Switzerland  ...                   0.24000  2015              │
+│ 1           2      Iceland  ...                   0.74000  2015              │
+│ 2           3      Denmark  ...                   0.12000  2015              │
+│ 3           4       Norway  ...                   0.34000  2015              │
+│ 4           5       Canada  ...                   0.40000  2015              │
+│ ...       ...          ...  ...                       ...   ...              │
+│ 1497       78    Venezuela  ...                   0.14982  2024              │
+│ 1498       54      Vietnam  ...                   0.27818  2024              │
+│ 1499      130        Yemen  ...                   0.19678  2024              │
+│ 1500      131       Zambia  ...                   0.19012  2024              │
+│ 1501      135     Zimbabwe  ...                   0.22708  2024              │
+│                                                                              │
+│ [1502 rows x 11 columns]}.                                                   │
+│                                                                              │
+╰─ OpenAIModel - gpt-4o-mini ──────────────────────────────────────────────────╯
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  top_happiest_countries_2020 = get_top_n_countries(column='happiness_score',   
+  year=2020, n=5)                                                               
+  print(top_happiest_countries_2020)                                            
+ ────────────────────────────────────────────────────────────────────────────── 
+Execution logs:
+[{'country': 'Finland', 'happiness_score': 7.8087}, {'country': 'Denmark', 
+'happiness_score': 7.6456}, {'country': 'Switzerland', 'happiness_score': 
+7.5599}, {'country': 'Iceland', 'happiness_score': 7.5045}, {'country': 
+'Norway', 'happiness_score': 7.488}]
+
+Out: None
+[Step 8: Duration 2.35 seconds| Input tokens: 30,069 | Output tokens: 1,022]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  final_answer([                                                                
+      {"country": "Finland", "happiness_score": 7.8087},                        
+      {"country": "Denmark", "happiness_score": 7.6456},                        
+      {"country": "Switzerland", "happiness_score": 7.5599},                    
+      {"country": "Iceland", "happiness_score": 7.5045},                        
+      {"country": "Norway", "happiness_score": 7.488}                           
+  ])                                                                            
+ ────────────────────────────────────────────────────────────────────────────── 
+Final answer: [{'country': 'Finland', 'happiness_score': 7.8087}, {'country': 
+'Denmark', 'happiness_score': 7.6456}, {'country': 'Switzerland', 
+'happiness_score': 7.5599}, {'country': 'Iceland', 'happiness_score': 7.5045}, 
+{'country': 'Norway', 'happiness_score': 7.488}]
+[Step 9: Duration 2.65 seconds| Input tokens: 35,644 | Output tokens: 1,228]
+[{'country': 'Finland', 'happiness_score': 7.8087}, {'country': 'Denmark', 'happiness_score': 7.6456}, {'country': 'Switzerland', 'happiness_score': 7.5599}, {'country': 'Iceland', 'happiness_score': 7.5045}, {'country': 'Norway', 'happiness_score': 7.488}]
+
+--- Query: Plot happiness_score over the years as a line chart, with one line per region. Save the plot to outputs/happiness_by_region.png. ---
+╭────────────────────────────────── New run ───────────────────────────────────╮
+│                                                                              │
+│ Plot happiness_score over the years as a line chart, with one line per       │
+│ region. Save the plot to outputs/happiness_by_region.png.                    │
+│ You have been provided with these additional arguments, that you can access  │
+│ directly using the keys as variables:                                        │
+│ {'happiness_df':       Ranking      country  ... Perceptions of corruption   │
+│ year                                                                         │
+│ 0           1  Switzerland  ...                   0.24000  2015              │
+│ 1           2      Iceland  ...                   0.74000  2015              │
+│ 2           3      Denmark  ...                   0.12000  2015              │
+│ 3           4       Norway  ...                   0.34000  2015              │
+│ 4           5       Canada  ...                   0.40000  2015              │
+│ ...       ...          ...  ...                       ...   ...              │
+│ 1497       78    Venezuela  ...                   0.14982  2024              │
+│ 1498       54      Vietnam  ...                   0.27818  2024              │
+│ 1499      130        Yemen  ...                   0.19678  2024              │
+│ 1500      131       Zambia  ...                   0.19012  2024              │
+│ 1501      135     Zimbabwe  ...                   0.22708  2024              │
+│                                                                              │
+│ [1502 rows x 11 columns]}.                                                   │
+│                                                                              │
+╰─ OpenAIModel - gpt-4o-mini ──────────────────────────────────────────────────╯
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  import pandas as pd                                                           
+  import matplotlib.pyplot as plt                                               
+                                                                                
+  # Calculate mean happiness score per region for each year                     
+  happiness_by_region = happiness_df.groupby(['year',                           
+  'region'])['happiness_score'].mean().reset_index()                            
+                                                                                
+  # Plot the data                                                               
+  plt.figure(figsize=(12, 6))                                                   
+  for region in happiness_by_region['region'].unique():                         
+      region_data = happiness_by_region[happiness_by_region['region'] ==        
+  region]                                                                       
+      plt.plot(region_data['year'], region_data['happiness_score'], marker='',  
+  label=region)                                                                 
+                                                                                
+  # Customize the plot                                                          
+  plt.title('Happiness Score Over the Years by Region', fontsize=16)            
+  plt.xlabel('Year', fontsize=14)                                               
+  plt.ylabel('Happiness Score', fontsize=14)                                    
+  plt.legend(title='Region', fontsize=12)                                       
+  plt.grid(True)                                                                
+                                                                                
+  # Save the plot                                                               
+  plt.savefig('outputs/happiness_by_region.png')                                
+  plt.close()                                                                   
+ ────────────────────────────────────────────────────────────────────────────── 
+Out: None
+[Step 10: Duration 3.76 seconds| Input tokens: 41,962 | Output tokens: 1,514]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  final_answer("The happiness score plot has been successfully saved to         
+  outputs/happiness_by_region.png.")                                            
+ ────────────────────────────────────────────────────────────────────────────── 
+Final answer: The happiness score plot has been successfully saved to 
+outputs/happiness_by_region.png.
+[Step 11: Duration 1.32 seconds| Input tokens: 48,821 | Output tokens: 1,594]
+The happiness score plot has been successfully saved to outputs/happiness_by_region.png.
+Verified: outputs/happiness_by_region.png exists.
+╭────────────────────────────────── New run ───────────────────────────────────╮
+│                                                                              │
+│ Which five countries had the highest GDP per capita in 2024?                 │
+│ You have been provided with these additional arguments, that you can access  │
+│ directly using the keys as variables:                                        │
+│ {'happiness_df':       Ranking      country  ... Perceptions of corruption   │
+│ year                                                                         │
+│ 0           1  Switzerland  ...                   0.24000  2015              │
+│ 1           2      Iceland  ...                   0.74000  2015              │
+│ 2           3      Denmark  ...                   0.12000  2015              │
+│ 3           4       Norway  ...                   0.34000  2015              │
+│ 4           5       Canada  ...                   0.40000  2015              │
+│ ...       ...          ...  ...                       ...   ...              │
+│ 1497       78    Venezuela  ...                   0.14982  2024              │
+│ 1498       54      Vietnam  ...                   0.27818  2024              │
+│ 1499      130        Yemen  ...                   0.19678  2024              │
+│ 1500      131       Zambia  ...                   0.19012  2024              │
+│ 1501      135     Zimbabwe  ...                   0.22708  2024              │
+│                                                                              │
+│ [1502 rows x 11 columns]}.                                                   │
+│                                                                              │
+╰─ OpenAIModel - gpt-4o-mini ──────────────────────────────────────────────────╯
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  top_gdp_countries_2024 = get_top_n_countries(column='gdp_per_capita',         
+  year=2024, n=5)                                                               
+  print(top_gdp_countries_2024)                                                 
+ ────────────────────────────────────────────────────────────────────────────── 
+Execution logs:
+[{'country': 'Luxembourg', 'gdp_per_capita': 10.0}, {'country': 'Ireland', 
+'gdp_per_capita': 9.94539}, {'country': 'Singapore', 'gdp_per_capita': 9.89526},
+{'country': 'United Arab Emirates', 'gdp_per_capita': 9.26467}, {'country': 
+'Switzerland', 'gdp_per_capita': 9.20463}]
+
+Out: None
+[Step 12: Duration 1.80 seconds| Input tokens: 56,120 | Output tokens: 1,707]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  final_answer([                                                                
+      {"country": "Luxembourg", "gdp_per_capita": 10.0},                        
+      {"country": "Ireland", "gdp_per_capita": 9.94539},                        
+      {"country": "Singapore", "gdp_per_capita": 9.89526},                      
+      {"country": "United Arab Emirates", "gdp_per_capita": 9.26467},           
+      {"country": "Switzerland", "gdp_per_capita": 9.20463}                     
+  ])                                                                            
+ ────────────────────────────────────────────────────────────────────────────── 
+Final answer: [{'country': 'Luxembourg', 'gdp_per_capita': 10.0}, {'country': 
+'Ireland', 'gdp_per_capita': 9.94539}, {'country': 'Singapore', 
+'gdp_per_capita': 9.89526}, {'country': 'United Arab Emirates', 
+'gdp_per_capita': 9.26467}, {'country': 'Switzerland', 'gdp_per_capita': 
+9.20463}]
+[Step 13: Duration 4.88 seconds| Input tokens: 63,729 | Output tokens: 1,940]
+[{'country': 'Luxembourg', 'gdp_per_capita': 10.0}, {'country': 'Ireland', 'gdp_per_capita': 9.94539}, {'country': 'Singapore', 'gdp_per_capita': 9.89526}, {'country': 'United Arab Emirates', 'gdp_per_capita': 9.26467}, {'country': 'Switzerland', 'gdp_per_capita': 9.20463}]
+╭────────────────────────────────── New run ───────────────────────────────────╮
+│                                                                              │
+│ Among countries present in both 2015 and 2024, which five had the largest    │
+│ increase in happiness_score? Join by country, compute 2024 minus 2015, and   │
+│ show both scores and the change. Note any limitation of this comparison.     │
+│ You have been provided with these additional arguments, that you can access  │
+│ directly using the keys as variables:                                        │
+│ {'happiness_df':       Ranking      country  ... Perceptions of corruption   │
+│ year                                                                         │
+│ 0           1  Switzerland  ...                   0.24000  2015              │
+│ 1           2      Iceland  ...                   0.74000  2015              │
+│ 2           3      Denmark  ...                   0.12000  2015              │
+│ 3           4       Norway  ...                   0.34000  2015              │
+│ 4           5       Canada  ...                   0.40000  2015              │
+│ ...       ...          ...  ...                       ...   ...              │
+│ 1497       78    Venezuela  ...                   0.14982  2024              │
+│ 1498       54      Vietnam  ...                   0.27818  2024              │
+│ 1499      130        Yemen  ...                   0.19678  2024              │
+│ 1500      131       Zambia  ...                   0.19012  2024              │
+│ 1501      135     Zimbabwe  ...                   0.22708  2024              │
+│                                                                              │
+│ [1502 rows x 11 columns]}.                                                   │
+│                                                                              │
+╰─ OpenAIModel - gpt-4o-mini ──────────────────────────────────────────────────╯
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 1 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  # Filter data for years 2015 and 2024                                         
+  happiness_2015 = happiness_df[happiness_df['year'] == 2015][['country',       
+  'happiness_score']]                                                           
+  happiness_2024 = happiness_df[happiness_df['year'] == 2024][['country',       
+  'happiness_score']]                                                           
+                                                                                
+  # Merge the two datasets on 'country'                                         
+  merged_happiness = pd.merge(happiness_2015, happiness_2024, on='country',     
+  suffixes=('_2015', '_2024'))                                                  
+                                                                                
+  # Calculate the change in happiness score                                     
+  merged_happiness['change'] = merged_happiness['happiness_score_2024'] -       
+  merged_happiness['happiness_score_2015']                                      
+                                                                                
+  # Get the top 5 countries with the largest increase                           
+  top_increase = merged_happiness.nlargest(5, 'change')[['country',             
+  'happiness_score_2015', 'happiness_score_2024', 'change']]                    
+                                                                                
+  print(top_increase)                                                           
+ ────────────────────────────────────────────────────────────────────────────── 
+Execution logs:
+         country  happiness_score_2015  happiness_score_2024  change
+127  Ivory Coast                  3.65                5.0801  1.4301
+131         Togo                  2.84                4.2141  1.3741
+72       Romania                  5.12                6.4912  1.3712
+126       Guinea                  3.66                5.0233  1.3633
+73        Serbia                  5.12                6.4108  1.2908
+
+Out: None
+[Step 14: Duration 4.94 seconds| Input tokens: 72,151 | Output tokens: 2,293]
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ Step 2 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ ─ Executing parsed code: ───────────────────────────────────────────────────── 
+  final_answer({                                                                
+      "top_countries": [                                                        
+          {"country": "Ivory Coast", "happiness_score_2015": 3.65,              
+  "happiness_score_2024": 5.0801, "change": 1.4301},                            
+          {"country": "Togo", "happiness_score_2015": 2.84,                     
+  "happiness_score_2024": 4.2141, "change": 1.3741},                            
+          {"country": "Romania", "happiness_score_2015": 5.12,                  
+  "happiness_score_2024": 6.4912, "change": 1.3712},                            
+          {"country": "Guinea", "happiness_score_2015": 3.66,                   
+  "happiness_score_2024": 5.0233, "change": 1.3633},                            
+          {"country": "Serbia", "happiness_score_2015": 5.12,                   
+  "happiness_score_2024": 6.4108, "change": 1.2908}                             
+      ],                                                                        
+      "limitations": "The increases in happiness scores do not account for      
+  other socioeconomic factors that may have influenced these changes,           
+  including variations in population, economic stability, political             
+  conditions, or external events."                                              
+  })                                                                            
+ ────────────────────────────────────────────────────────────────────────────── 
+Final answer: {'top_countries': [{'country': 'Ivory Coast', 
+'happiness_score_2015': 3.65, 'happiness_score_2024': 5.0801, 'change': 1.4301},
+{'country': 'Togo', 'happiness_score_2015': 2.84, 'happiness_score_2024': 
+4.2141, 'change': 1.3741}, {'country': 'Romania', 'happiness_score_2015': 5.12, 
+'happiness_score_2024': 6.4912, 'change': 1.3712}, {'country': 'Guinea', 
+'happiness_score_2015': 3.66, 'happiness_score_2024': 5.0233, 'change': 1.3633},
+{'country': 'Serbia', 'happiness_score_2015': 5.12, 'happiness_score_2024': 
+6.4108, 'change': 1.2908}], 'limitations': 'The increases in happiness scores do
+not account for other socioeconomic factors that may have influenced these 
+changes, including variations in population, economic stability, political 
+conditions, or external events.'}
+[Step 15: Duration 7.70 seconds| Input tokens: 81,319 | Output tokens: 2,890]
+{'top_countries': [{'country': 'Ivory Coast', 'happiness_score_2015': 3.65, 'happiness_score_2024': 5.0801, 'change': 1.4301}, {'country': 'Togo', 'happiness_score_2015': 2.84, 'happiness_score_2024': 4.2141, 'change': 1.3741}, {'country': 'Romania', 'happiness_score_2015': 5.12, 'happiness_score_2024': 6.4912, 'change': 1.3712}, {'country': 'Guinea', 'happiness_score_2015': 3.66, 'happiness_score_2024': 5.0233, 'change': 1.3633}, {'country': 'Serbia', 'happiness_score_2015': 5.12, 'happiness_score_2024': 6.4108, 'change': 1.2908}], 'limitations': 'The increases in happiness scores do not account for other socioeconomic factors that may have influenced these changes, including variations in population, economic stability, political conditions, or external events.'}
